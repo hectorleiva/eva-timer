@@ -6,6 +6,12 @@ Evangelion timer that runs on browsers!
 <img src="images/00_main.gif" width="500" />
 <br>
 
+## Quick Start
+```bash
+python3 -m http.server 9000
+```
+Then open `http://localhost:9000` in your browser.
+
 ## Features
 - [x] Run on browsers using PyScript
 - [ ] Run on browsers using Javascript [work in progress]
@@ -14,6 +20,7 @@ Evangelion timer that runs on browsers!
 - [x] Support Settings
 - [x] Support Progressive Web App (PWA)
 - [ ] Support other themes, e.g. Rebuild of Evangelion [work in progress]
+- [x] Add "streamer" mode (converts the background to green for chromakey effects)
 
 
 ## User Guide
@@ -51,6 +58,7 @@ Here is a list of configurable URL params:
 |`fullscreen`| 0, 1 | Fullscreen mode | 0 |
 |`duration` | integer | Total countdown/countup duration in seconds| 300 |
 |`emergency_duration` | integer | Time remains in seconds to change to emergency| 60 |
+|`streaming` | 0 , 1 | Converts the background to green which is useful to chromakey out via a video application | 0 |
 
 
 ### Progressive Web App
@@ -58,8 +66,6 @@ In Chrome, you can install this app as standalone web app. The "Install app" but
 <br>
 <img src="images/07_pwa1.jpg" width="200" />
 <br>
-
-
 
 
 ## Screenshots

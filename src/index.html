@@ -4,20 +4,40 @@
 <head>
     <title>活動限界まであと (PyScript)</title>
     <!-- icons -->
-	<link rel="icon" type="image/png" href="images/favicon.png">
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png">
-	<link rel="apple-touch-icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" type="image/png" href="images/favicon.png">
     <!-- pwa -->
     <link rel="manifest" href="manifest.json">
     <script>
-		if (navigator && navigator.serviceWorker) {
-			navigator.serviceWorker.register('sw.js').then(() => {
+        if(navigator && navigator.serviceWorker) {
+            navigator.serviceWorker.register('sw.js').then(() => {
                 console.log('[serviceWorker] registered');
             }).catch((error) => {
                 console.log('[serviceWorker] registration failed with ' + error);
             });
-		}
-	</script>
+        }
+    </script>
+    <script type="text/javascript">
+        window.addEventListener("load", (event) => {
+            function get_url_params() {
+                var params = new URLSearchParams(window.location.search);
+                var url_params = {};
+                for (var key of params.keys()) {
+                    url_params[key] = params.get(key);
+                }
+                return url_params;
+            }
+            const parameters = get_url_params();
+
+            if (parameters["streaming"] == 1) {
+                document.getElementById("timer").style.backgroundColor = "green"
+                document.getElementById("parent").style.backgroundColor = "green"
+                document.getElementById("config").style.color = "green"
+                document.body.style.backgroundColor = "green"
+            }
+        });
+    </script>
     <!-- fonts -->
     <link rel="stylesheet" href="fonts.css">
     <!-- Pyscript -->
@@ -34,6 +54,7 @@
     <py-script src="py/timer.py"></py-script>
     <py-script src="py/svgui.py"></py-script>
     <py-script src="py/eva-timer.py"></py-script>
+    <div id="config">
     <py-script>
         # Config
         params = URLSearchParams.new(window.location.search)
@@ -91,6 +112,8 @@
         elif config["theme"] == "rebuild":
             toggle_theme_rebuild()
     </py-script>
+    </div>
 
-    </body>
+</body>
+
 </html>

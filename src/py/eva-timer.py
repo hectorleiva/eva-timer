@@ -101,8 +101,10 @@ def render_callback(time):
     if minutes < 10:
         gui_timer.select(SEL.TEXTGROUP_TIMER).show()
         gui_timer.select(SEL.TEXTGROUP_SYSTEM_TIMER).hide()
-        gui_timer.select(SEL.TEXT_MIN_SEC).text_content(f"{minutes:01d}:{seconds:02d}")
-        gui_timer.select(SEL.TEXT_CENTISEC).text_content(f":{centiseconds:02d}")
+        gui_timer.select(SEL.TEXT_MIN_SEC).text_content(
+            f"{minutes:01d}:{seconds:02d}")
+        gui_timer.select(SEL.TEXT_CENTISEC).text_content(
+            f":{centiseconds:02d}")
     else:
         gui_timer.select(SEL.TEXTGROUP_TIMER).hide()
         gui_timer.select(SEL.TEXTGROUP_SYSTEM_TIMER).show()
@@ -142,22 +144,28 @@ def status_callback(from_status, to_status, from_running, to_running):
 
 
 def config_callback():
-    gui_settings.select("#countdown").set_checked(timer.mode == timer.MODE_COUNT_DOWN)
-    gui_settings.select("#countup").set_checked(timer.mode == timer.MODE_COUNT_UP)
-    gui_settings.select("#systemtime").set_checked(timer.mode == timer.MODE_SYSTEM_TIME)
+    gui_settings.select("#countdown").set_checked(
+        timer.mode == timer.MODE_COUNT_DOWN)
+    gui_settings.select("#countup").set_checked(
+        timer.mode == timer.MODE_COUNT_UP)
+    gui_settings.select("#systemtime").set_checked(
+        timer.mode == timer.MODE_SYSTEM_TIME)
 
     gui_settings.select("#autoplay").set_checked(config["autoplay"] == 1)
     gui_settings.select("#tilted").set_checked(config["tilted"] == 1)
     gui_settings.select("#fullscreen").set_checked(config["fullscreen"] == 1)
-    gui_settings.select("#wireframe").set_checked(config["theme"] == "wireframe")
-    gui_settings.select("#greyscale").set_checked(config["theme"] == "greyscale")
+    gui_settings.select("#wireframe").set_checked(
+        config["theme"] == "wireframe")
+    gui_settings.select("#greyscale").set_checked(
+        config["theme"] == "greyscale")
     gui_settings.select("#rebuild").set_checked(config["theme"] == "rebuild")
 
 
 def register_event_listeners_timer():
     # Play/Pause/Reset when click on the timer
     gui_timer.select(SEL.PANEL_TIMER).clickable().on_click(
-        lambda e: (timer.reset() if timer.time_is_up() else timer.toggle_play_pause(),)
+        lambda e: (timer.reset() if timer.time_is_up()
+                   else timer.toggle_play_pause(),)
     )
 
     # Settings
@@ -189,13 +197,16 @@ def register_event_listeners_timer():
     )
 
     # Stop
-    gui_timer.select(SEL.BUTTON_STOP).clickable().on_click(lambda e: timer.reset())
+    gui_timer.select(SEL.BUTTON_STOP).clickable().on_click(
+        lambda e: timer.reset())
 
     # Slow
-    gui_timer.select(SEL.BUTTON_SLOW).clickable().on_click(lambda e: timer.toggle_play_pause())
+    gui_timer.select(SEL.BUTTON_SLOW).clickable().on_click(
+        lambda e: timer.toggle_play_pause())
 
     # TBC
-    gui_timer.select(SEL.CLICKABLE_BOTTOM).clickable().on_click(lambda e: toggle_rebuild_theme())
+    gui_timer.select(SEL.CLICKABLE_BOTTOM).clickable().on_click(
+        lambda e: toggle_rebuild_theme())
 
 
 def register_event_listeners_settings():
@@ -298,7 +309,8 @@ def show_standby():
             SEL.ALL_BORDERS,
         ]
     ).reset_all_color()
-    gui_timer.select([SEL.STRIP_INTERNAL, SEL.BAR_RACING]).remove_class(STY.BLINK_FAST)
+    gui_timer.select([SEL.STRIP_INTERNAL, SEL.BAR_RACING]
+                     ).remove_class(STY.BLINK_FAST)
     gui_timer.select([SEL.BUTTON_EMERGENCY, SEL.TEXTGROUP_ACTIVE_TIME]).remove_class(
         STY.BLINK
     )
@@ -370,7 +382,8 @@ def show_emergency():
 
 
 def show_ended():
-    gui_timer.select([SEL.STRIP_INTERNAL, SEL.BAR_RACING]).toggle_class(STY.BLINK_FAST)
+    gui_timer.select([SEL.STRIP_INTERNAL, SEL.BAR_RACING]
+                     ).toggle_class(STY.BLINK_FAST)
     gui_timer.select([SEL.BUTTON_EMERGENCY, SEL.TEXTGROUP_ACTIVE_TIME]).toggle_class(
         STY.BLINK
     )
@@ -425,7 +438,8 @@ def toggle_wireframe():
     gui_timer.select(SEL.ALL_CLICKABLES).toggle_class("wireframe")
 
     # Text
-    gui_timer.select(SEL.ALL_TEXT).toggle_class("opacity70").toggle_class("wireframe")
+    gui_timer.select(SEL.ALL_TEXT).toggle_class(
+        "opacity70").toggle_class("wireframe")
 
     # Timer Text
     gui_timer.select(SEL.TEXT_TIMER).toggle_class("wireframe-bold")
@@ -548,7 +562,8 @@ def apply_rebuild_theme():
     ).show().all_color(POWER_BUTTON_COLOR)
 
     # Timer Fonts
-    gui_timer.select(SEL.TEXT_TIMER).font_family("SevenSegment").all_color(REBUILD_RED)
+    gui_timer.select(SEL.TEXT_TIMER).font_family(
+        "SevenSegment").all_color(REBUILD_RED)
     gui_timer.select(SEL.TEXT_MIN_SEC).font_size("3700%")
     gui_timer.select(SEL.TEXT_CENTISEC).font_size("2600%")
     gui_timer.select(SEL.TEXT_SYSTEM_TIMER_MIN_SEC).font_size("3550%")

@@ -68,7 +68,8 @@ class Timer:
 
         # For status change
         if self.previous_status != new_status or self.previous_running != self.running:
-            self.status_callback(self.previous_status, new_status, self.previous_running, self.running)
+            self.status_callback(
+                self.previous_status, new_status, self.previous_running, self.running)
         self.previous_status = new_status
         self.previous_running = self.running
 

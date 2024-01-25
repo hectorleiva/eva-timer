@@ -218,12 +218,14 @@ class Svgui:
 
     def on_input(self, listener):
         for element in self.targets:
-            element.addEventListener("input", create_proxy(lambda event: listener(element, event)))
+            element.addEventListener("input", create_proxy(
+                lambda event: listener(element, event)))
         return self
 
     def on_focusout(self, listener):
         for element in self.targets:
-            element.addEventListener("focusout", create_proxy(lambda event: listener(element, event)))
+            element.addEventListener("focusout", create_proxy(
+                lambda event: listener(element, event)))
         return self
 
     # --- Methods that depends on css

@@ -3,6 +3,7 @@ from js import console
 from js import URLSearchParams, window
 import datetime
 
+
 class Config:
     def __init__(self) -> None:
         params = URLSearchParams.new(window.location.search)
